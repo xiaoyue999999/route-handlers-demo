@@ -1,3 +1,3 @@
-export function GET() {
-  return new Response("profile/page.tsx");
+export default function profilePage() {
+  return <h1>profile</h1>;
 }
