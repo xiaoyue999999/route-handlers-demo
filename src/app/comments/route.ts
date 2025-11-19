@@ -1,9 +1,17 @@
+import { NextRequest } from "next/server";
 import { comments } from "./data";
 
 // 查询所有
-// http://localhost:3000/comments
-export async function GET() {
-  return Response.json(comments);
+// http://localhost:3000/comments?text=1
+export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams;
+  const text = searchParams.get("text"); // text是参数名称
+
+  const currentComments = text
+    ? comments.filter((comment) => comment.text.includes(text))
+    : comments;
+
+  return Response.json(currentComments);
 }
 
 // http://localhost:3000/comments
@@ -24,6 +32,3 @@ export async function POST(request: Request) {
     headers: { "Content-Type": "application/json" },
   });
 }
-
-
-
