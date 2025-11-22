@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// middleware 这个文件名称已经失效
+// middleware 这个文件名称已经失效 改为 proxy
 
 // 全局中间件示例
 // 可以拦截路由的走向
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const response = NextResponse.next();
 
   const name = request.cookies.get('name');
@@ -18,10 +18,10 @@ export function middleware(request: NextRequest) {
     response.cookies.set('name', 'xiaoyue');
   }
 
-  //   console.log('request.nextUrl.pathname', request.nextUrl.pathname);
-  //   if (["/"].includes(request.nextUrl.pathname)) {
-  //     return NextResponse.redirect(new URL("/hello", request.url));
-  //   }
+    // console.log('request.nextUrl.pathname', request.nextUrl.pathname);
+    // if (["/"].includes(request.nextUrl.pathname)) {
+    //   return NextResponse.redirect(new URL("/hello", request.url));
+    // }
 
   // 必须要有返回值内容
   return response;
