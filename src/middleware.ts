@@ -16,6 +16,12 @@ export function middleware(request: NextRequest) {
     // 如果没有 name cookie 就设置一个
     response.cookies.set("name", "xiaoyue");
   }
+
+//   console.log('request.nextUrl.pathname', request.nextUrl.pathname);
+//   if (["/"].includes(request.nextUrl.pathname)) {
+//     return NextResponse.redirect(new URL("/hello", request.url));
+//   }
+
   // 必须要有返回值内容
   return response;
 
