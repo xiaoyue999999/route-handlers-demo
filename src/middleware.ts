@@ -1,27 +1,27 @@
-import { cookies } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server';
+
+// middleware 这个文件名称已经失效
 
 // 全局中间件示例
 // 可以拦截路由的走向
 export function middleware(request: NextRequest) {
   const response = NextResponse.next();
 
-  const name = request.cookies.get("name");
+  const name = request.cookies.get('name');
 
-  console.log("name", name);
+  console.log('name', name);
 
-  response.cookies.set("jack", "nihao");
+  response.cookies.set('jack', 'nihao');
 
   if (!name) {
     // 如果没有 name cookie 就设置一个
-    response.cookies.set("name", "xiaoyue");
+    response.cookies.set('name', 'xiaoyue');
   }
-  
 
-//   console.log('request.nextUrl.pathname', request.nextUrl.pathname);
-//   if (["/"].includes(request.nextUrl.pathname)) {
-//     return NextResponse.redirect(new URL("/hello", request.url));
-//   }
+  //   console.log('request.nextUrl.pathname', request.nextUrl.pathname);
+  //   if (["/"].includes(request.nextUrl.pathname)) {
+  //     return NextResponse.redirect(new URL("/hello", request.url));
+  //   }
 
   // 必须要有返回值内容
   return response;
