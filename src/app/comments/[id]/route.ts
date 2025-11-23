@@ -1,4 +1,5 @@
 import { comments } from "../data";
+import { NextResponse } from 'next/server';
 
 // 精确查询
 // http://localhost:3000/comments/:id
@@ -18,7 +19,7 @@ export async function GET(
 
 // 更新一条评论
 // http://localhost:3000/comments/:id
-export async function PATCH (response: Response, { params }: { params: Promise<{ id: string }> }) {
+export async function POST (response: any, { params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
     const { text } = await response.json() || {};
     const commentIndex = comments.findIndex((c) => c.id === id);
@@ -33,7 +34,7 @@ export async function PATCH (response: Response, { params }: { params: Promise<{
 }
 
 // 删除其中一条
-export async function DELETE(response: Response, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(response: any, { params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
     const commentIndex = comments.findIndex((c) => c.id === id);
