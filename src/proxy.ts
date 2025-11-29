@@ -9,7 +9,7 @@ export function proxy(request: NextRequest) {
 
   const name = request.cookies.get('name');
 
-  console.log('name', name);
+  // console.log('name', name);
 
   response.cookies.set('jack', 'nihao');
 
