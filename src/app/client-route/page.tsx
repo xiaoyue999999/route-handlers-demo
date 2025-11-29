@@ -4,9 +4,11 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useDefaultTsx } from '@/components/defaultContext';
+import { ClientText } from '@/utils/client-utils';
 
 export default function ClientRoute() {
   const defaultTsx = useDefaultTsx();
+  const result = ClientText();
   const settings = {
     dots: true,
   };
@@ -28,6 +30,7 @@ export default function ClientRoute() {
       </Slider>
 
       {defaultTsx.name}
+      {result}
     </div>
   );
 }

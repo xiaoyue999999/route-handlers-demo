@@ -1,4 +1,4 @@
-import { ServerSideText } from '@/utils/utils';
+import { ServerSideText } from '@/utils/server-utils';
 import { SliderImage } from '@/components/sliderImage';
 
 export default function ServerRoute() {
