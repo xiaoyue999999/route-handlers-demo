@@ -1,39 +1,45 @@
-import { addProduct } from '@/prisma-db';
-import { redirect } from 'next/navigation';
+'use client';
+
 import { Submit } from './components/submit';
+import { useActionState } from 'react';
+import { createProduct, FormState } from '@/action/product';
 
 export default function () {
-  const createProduct = async (formData: FormData) => {
-    'use server';
-    const title = formData.get('title') as string;
-    const price = formData.get('price') as string;
-    const description = formData.get('description') as string;
-
-    await addProduct({ title, price: parseInt(price), description });
-
-    redirect('/product-db');
+  const initialState: FormState = {
+    errors: {},
   };
+
+  const [state, formAction, isPending] = useActionState(createProduct, initialState);
 
   return (
     <>
-      <form action={createProduct}>
-        <label>
-          title: <input type="text" name="title" />
-        </label>
-        <br />
+      <form action={formAction}>
+        <div>
+          <label>
+            title: <input type="text" name="title" />
+          </label>
+          {!!state.errors.title && <p className="text-red-500">{state.errors.title}</p>}
+        </div>
 
-        <label>
-          price: <input type="text" name="price" />
-        </label>
-        <br />
+        <div>
+          <label>
+            price: <input type="text" name="price" />
+          </label>
+          {!!state.errors.price && <p className="text-red-500">{state.errors.price}</p>}
+        </div>
 
-        <label>
-          description:
-          <input type="text" name="description" />
-        </label>
+        <div>
+          <label>
+            description:
+            <input type="text" name="description" />
+          </label>
+          {!!state.errors.description && <p className="text-red-500">{state.errors.description}</p>}
+        </div>
 
-        <br />
-        <Submit />
+        {/* <Submit /> */}
+        <button type="submit" disabled={isPending}>
+          {isPending ? 'loading...' : 'add'}
+        </button>
       </form>
     </>
   );
