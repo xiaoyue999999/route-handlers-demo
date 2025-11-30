@@ -1,5 +1,6 @@
 import { addProduct } from '@/prisma-db';
 import { redirect } from 'next/navigation';
+import { Submit } from './components/submit';
 
 export default function () {
   const createProduct = async (formData: FormData) => {
@@ -32,7 +33,7 @@ export default function () {
         </label>
 
         <br />
-        <button type="submit">add</button>
+        <Submit />
       </form>
     </>
   );
