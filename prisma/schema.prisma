@@ -2,14 +2,13 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../src/generated/prisma"
 }
 
-// 基础配置信息
 datasource db {
   provider = "sqlite"
-  url      = "file:app.db" // 链接的表地址
+  url      = "file:dev.db" // 链接的表地址
 }
 
 model Product {

@@ -1,39 +1,30 @@
-// import { PrismaClient } from './generated/prisma/client';
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from './generated/prisma/client';
+// import { PrismaClient } from "@prisma/client";
 
-const prisma  = new PrismaClient();
+const prisma = new PrismaClient();
 
-const seedProduct = async () => {
-  console.log('await prisma.product', await prisma.product);
-  
+export function demo() {
+  console.log('demo');
+}
+
+demo();
+
+const seedProducts = async () => {
+  console.log('12123', prisma);
+
   const count = await prisma.product.count();
-
-  console.log('count', count);
-
   if (count === 0) {
     await prisma.product.createMany({
       data: [
-        {
-          title: 'product 1',
-          price: 500,
-          description: '你好你好',
-        },
-        {
-          title: 'product 2',
-          price: 200,
-          description: '你好你好',
-        },
-        {
-          title: 'product 3',
-          price: 800,
-          description: '你好你好',
-        },
+        { title: 'Product 1', price: 500, description: 'Description 1' },
+        { title: 'Product 2', price: 700, description: 'Description 2' },
+        { title: 'Product 3', price: 1000, description: 'Description 3' },
       ],
     });
   }
 };
 
-seedProduct();
+seedProducts();
 
 // 调用方法
 // 获取数据
