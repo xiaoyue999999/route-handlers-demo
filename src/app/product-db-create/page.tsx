@@ -9,7 +9,7 @@ export default function () {
     errors: {},
   };
 
-  const [state, formAction, isPending] = useActionState(createProduct, initialState);
+  const [state, formAction, isPending] = useActionState(createProduct, initialState)
 
   return (
     <>
