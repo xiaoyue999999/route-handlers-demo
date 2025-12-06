@@ -42,9 +42,20 @@
 /**
  * next一般情况下使用中间件来做一些权限校验之类的功能
  */
-import { clerkMiddleware } from '@clerk/nextjs/server';
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 
-export default clerkMiddleware();
+// 只是用来匹配公开路由的
+const isPublicRoute = createRouteMatcher(['/', '/signn-in(.*)?', '/sign-up(.*)?']);
+
+export default clerkMiddleware(async (auto, req) => {
+  const { userId, redirectToSignIn } = await auto();
+
+  // 退出状态下 需要保护路由
+  if (!userId && !isPublicRoute(req)) {
+    // allow access to public routes
+    return redirectToSignIn();
+  }
+});
 
 export const config = {
   matcher: [
