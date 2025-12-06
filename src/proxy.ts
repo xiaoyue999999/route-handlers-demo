@@ -43,12 +43,23 @@
  * next一般情况下使用中间件来做一些权限校验之类的功能
  */
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import { NextResponse } from 'next/server';
 
 // 只是用来匹配公开路由的
 const isPublicRoute = createRouteMatcher(['/', '/dashbord', '/signn-in(.*)?', '/sign-up(.*)?']);
 
+const isAdmin = createRouteMatcher(['/admin(.*)?']);
+
 export default clerkMiddleware(async (auto, req) => {
   const { userId, redirectToSignIn } = await auto();
+
+  // 管理员保护路由
+  const autoAuthSessionClaims = (await auto()).sessionClaims as any;
+  if (isAdmin(req) && autoAuthSessionClaims?.metadata?.role !== 'admin') {
+    const url = new URL('/', req.url);
+
+    return NextResponse.redirect(url);
+  }
 
   // 退出状态下 需要保护路由
   if (!userId && !isPublicRoute(req)) {
