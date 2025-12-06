@@ -1,4 +1,4 @@
-import { SignInButton, SignOutButton, SignedIn, SignedOut } from '@clerk/nextjs';
+import { SignInButton, SignOutButton, SignUpButton, SignedIn, SignedOut } from '@clerk/nextjs';
 import Link from 'next/link';
 
 export function NavHeader() {
@@ -10,7 +10,12 @@ export function NavHeader() {
 
       <div className="flex gap-3">
         <SignedOut>
-          <SignInButton mode="modal" />
+          <SignInButton>
+            <span>sign in === 登录</span>
+          </SignInButton>
+          <SignUpButton>
+            <span>sign up === 注册</span>
+          </SignUpButton>
         </SignedOut>
 
         <SignedIn>

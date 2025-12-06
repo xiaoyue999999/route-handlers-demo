@@ -46,7 +46,7 @@ import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
 // 只是用来匹配公开路由的
-const isPublicRoute = createRouteMatcher(['/', '/dashbord', '/signn-in(.*)?', '/sign-up(.*)?']);
+const isPublicRoute = createRouteMatcher(['/', '/dashbord', '/sign-in(.*)?', '/sign-up(.*)?']);
 
 const isAdmin = createRouteMatcher(['/admin(.*)?']);
 
