@@ -45,7 +45,7 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 
 // 只是用来匹配公开路由的
-const isPublicRoute = createRouteMatcher(['/', '/signn-in(.*)?', '/sign-up(.*)?']);
+const isPublicRoute = createRouteMatcher(['/', '/dashbord', '/signn-in(.*)?', '/sign-up(.*)?']);
 
 export default clerkMiddleware(async (auto, req) => {
   const { userId, redirectToSignIn } = await auto();
