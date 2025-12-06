@@ -3,12 +3,6 @@ import { PrismaClient } from './generated/prisma/client';
 
 const prisma = new PrismaClient();
 
-export function demo() {
-  console.log('demo');
-}
-
-demo();
-
 const seedProducts = async () => {
   console.log('12123', prisma);
 
