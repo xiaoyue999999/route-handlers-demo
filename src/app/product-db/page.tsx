@@ -1,3 +1,4 @@
+import { deleteProductForm } from '@/action/product';
 import { getProducts } from '@/prisma-db';
 
 export default async function ProductDBPage() {
@@ -11,6 +12,10 @@ export default async function ProductDBPage() {
             <h2>{res.title}</h2>
             <h3>{res.price}</h3>
             <div>{res.description}</div>
+
+            <form action={deleteProductForm.bind(null, res.id)}>
+              <button>删除</button>
+            </form>
           </div>
         ))}
       </div>

@@ -1,6 +1,7 @@
 'use server';
 
-import { addProduct, updateProduct } from '@/prisma-db';
+import { addProduct, deleteProduct, updateProduct } from '@/prisma-db';
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 type Error = {
@@ -40,6 +41,7 @@ export const createProduct = async (preFormDate: any, formData: FormData) => {
   redirect('/product-db');
 };
 
+// 操作表单信息
 export const editProduct = async (id: number, preFormDate: any, formData: FormData) => {
   'use server';
   const title = formData.get('title') as string;
@@ -66,3 +68,12 @@ export const editProduct = async (id: number, preFormDate: any, formData: FormDa
 
   redirect('/product-db');
 };
+
+// 在表单上删除其中一条
+export async function deleteProductForm(id: number) {
+  'use server';
+  await deleteProduct(id);
+
+  // 删除完毕 删除条目后 重新验证路径
+  revalidatePath('/product-db');
+}
