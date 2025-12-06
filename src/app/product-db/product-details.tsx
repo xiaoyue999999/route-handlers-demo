@@ -20,9 +20,9 @@ export function ProductDetails({ products }: { products: any[] }) {
       <div>
         {optimisticProduct.map((res: any) => (
           <div key={res.id} className="border m-3">
-            <h2>{res.title}</h2>
-            <h3>{res.price}</h3>
-            <div>{res.description}</div>
+            <h2>title: {res.title}</h2>
+            <h3>price:{res.price}</h3>
+            <div>description: {res.description}</div>
 
             <form action={handleProductDeletion.bind(null, res.id)}>
               <button>删除</button>
