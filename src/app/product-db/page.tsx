@@ -1,24 +1,8 @@
-import { deleteProductForm } from '@/action/product';
 import { getProducts } from '@/prisma-db';
+import { ProductDetails } from './product-details';
 
 export default async function ProductDBPage() {
   const products = await getProducts();
 
-  return (
-    <>
-      <div>
-        {products.map((res: any) => (
-          <div key={res.id} className="border m-3">
-            <h2>{res.title}</h2>
-            <h3>{res.price}</h3>
-            <div>{res.description}</div>
-
-            <form action={deleteProductForm.bind(null, res.id)}>
-              <button>删除</button>
-            </form>
-          </div>
-        ))}
-      </div>
-    </>
-  );
+  return <ProductDetails products={products} />;
 }
